@@ -10,6 +10,10 @@ imaginary service.
 The To-Do service provides a cloud-hosted task list through which
 subscribers can post tasks and receive reminders of those tasks.
 
+## Alternate Overview Pages
+
+* [JDN's New Overview Topic](to-do-lp-jdn)
+
 ## Quickstart
 
 [Post your first task _(coming soon)_](#quickstart) with the To-Do service to see how easy it is to use!
