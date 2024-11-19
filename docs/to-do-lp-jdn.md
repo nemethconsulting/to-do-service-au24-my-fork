@@ -43,6 +43,8 @@ generally `http://localhost:3000`.
 * [User resource overview](api/user.md)
     * [Get all users](users-get-all-users.md)
     * [Get users by ID](users-get-user-by-id.md)
+    * [Get all users](api/users-get-all-users.md)
+    * [Get users by ID](api/users-get-user-by-id.md)
 * [Task resource overview](api/task.md)
     * [Get all tasks _(coming soon)_](#resource-properties)
     * [Get task by ID _(coming soon)_](#resource-properties)
