@@ -2,64 +2,56 @@
 layout: page
 ---
 
-# Tutorial: Add a new task
+# Tutorial: Delete a task
+There is nothing more satisfying than crossing an item off your to-do list. While you
+can't cross off a digital task, you can delete it from your cloud task list.
 
-In this tutorial, you learn the operations to call to
-add a new task for a user of the service.
+In this tutorial, you'll learn the operations to delete a task once it is complete (or no longer needed).
 
-Expect this tutorial to take about 15 minutes to complete.
+Expect this tutorial to take about 10 minutes to complete.
 
 ## Before you start
 
 Make sure you've completed the [Before you start a tutorial](../before-you-start-a-tutorial.md) topic on the development system you'll use for the tutorial.
 
-## Add a new task
+## Delete a task using curl
 
-Adding a new task to the service requires that you add (`POST`) the details of a new [`task`](../api/task.md) resource to the service.
-
-To add a new task:
+To 'DELETE' a task:
 
 1. Make sure your local service is running, or start it by using this command, if it's not.
 
-    ```shell
-    cd <your-github-workspace>/to-do-service/api
-    json-server -w to-do-db-source.json
-    ```
+```shell
+cd <your-github-workspace>/to-do-service/api
+json-server -w to-do-db-source.json
+```
 
-1. Open the Postman app on your desktop.
-1. In the Postman app, create a new request with these values:
-    * **METHOD**: POST
-    * **URL**: `{{base_url}}/tasks`
-    * **Headers**:
-        * `Content-Type: application/json`
-    * **Request body**:
-        You can change the values of each property as you'd like.
+2. Open a separate terminal.
 
-        ```js
-        {
-            "user_id": 3,
-            "title": "Get new tires",
-            "description": "Get new tires for Hoppity",
-            "due_date": "2024-03-11T14:00",
-            "warning": "-60"
-        }
-        ```
+3. To locate the id of the task you'd like to delete, retrieve a list of all tasks.
 
-1. In the Postman app, choose **Send** to make the request.
-1. Watch for the response body, which should look something like this. Note that the names should be the same as you used in your **Request body** and the response should include the new user's `id`.
+```shell
+curl http://{base_url}/tasks
+```
 
-    ```js
-    {
-        "user_id": 3,
-        "title": "Get new tires",
-        "description": "Get new tires for Hoppity",
-        "due_date": "2024-03-11T14:00",
-        "warning": "-60",
-        "id": 5
-    }
-    ```
+4. Review the returned data to find the unique `id` of the task you'd like to delete.
 
-After doing this tutorial in Postman, you might like to repeat it in
-your favorite programming language. To do this, adapt the values from
-the tutorial to the properties and arguments that the language uses to
-make REST API calls.
+5. Again, in the terminal, send a `DELETE` call specifying that task `id`
+
+```shell
+curl -X DELETE http://{base_url}/tasks/{task-id}
+```
+
+6. To verify that the task has indeed been deleted, do another `GET` call for that specific task.
+
+```shell
+curl http://{base_url}/tasks/{task-id}
+```
+
+If the returned value is a set of empty brackets, your task has been removed from the cloud list.
+
+```
+{}
+```
+
+7. Repeat these steps to remove future completed tasks, and review our [docs](index.md) to see other
+tasks you can perform with the service.
